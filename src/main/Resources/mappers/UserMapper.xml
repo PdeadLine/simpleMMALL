@@ -151,7 +151,8 @@
       update_time = now()
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <select id="checkUserName" resultMap="BaseResultMap" parameterType="string">
-
+  <select id="checkUserName" resultType="int" parameterType="string">
+    select count(1) from tmall_user
+    where username=#{username}
   </select>
 </mapper>

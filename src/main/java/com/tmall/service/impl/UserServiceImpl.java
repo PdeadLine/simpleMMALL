@@ -14,6 +14,12 @@ public class UserServiceImpl implements IUserService {
     UserMapper userMapper;
     @Override
     public ServerResponse<User> login(String username, String password) {
+        int resultCount = userMapper.checkUserName(username);
+        if (resultCount == 0) {
+            return ServerResponse.createByErrorMessage("用户名不存在");
+        }
+        //todo 密码登陆MD5
+
         return null;
     }
 }
