@@ -73,4 +73,11 @@ public class UserServiceImpl implements IUserService {
         }
         return ServerResponse.createBySuccessMessage("检验成功");
     }
+
+    public ServerResponse<String> selectQuestion(String username) {
+        ServerResponse validResponse = this.checkValid(username, Const.USERNAME);
+        if (!validResponse.isSuccess()) {
+            return ServerResponse.createByErrorMessage("");
+        }
+    }
 }
