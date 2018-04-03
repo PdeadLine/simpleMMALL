@@ -11,4 +11,6 @@ public interface IUserService {
     public ServerResponse<String> checkValid(String str, String type);
 
     public ServerResponse<String> selectQuestion(String username);
+
+    public ServerResponse<String> checkAnswer(String username,String question,String answer);
 }

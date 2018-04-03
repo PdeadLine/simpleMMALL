@@ -170,4 +170,19 @@
     and
     password=#{password}
   </select>
+
+  <select id="selectQuetionByUsername" resultType="string" parameterType="string">
+    select
+    question
+    from tmall_user
+    where username=#{username}
+  </select>
+  <select id="checkAnswer" resultType="int" parameterType="map">
+    select
+    count(1)
+    from tmall_user
+    where username=#{username}
+    and question=#{question}
+    and answer=#{answer}
+  </select>
 </mapper>

@@ -61,7 +61,7 @@ public class UserController {
     }
 
     /**
-     * 校验；检查用户
+     * 检查用户名是否有效
      * @param str
      * @param type
      * @return
@@ -87,8 +87,19 @@ public class UserController {
         return ServerResponse.createByErrorMessage("用户未登录，无法获取当前用户信息");
     }
 
+    /**
+     * 忘记密码[申请]
+     * @param username
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "forget_get_question.do",method = RequestMethod.GET)
     public ServerResponse<String> forgetGetQuestion(String username) {
-        return null;
+        return iUserService.selectQuestion(username);
     }
-
+    @ResponseBody
+    @RequestMapping(value = "forget_check_answer.do",method = RequestMethod.GET)
+    public ServerResponse<String> forgetCheckAnswer(String username, String question, String answer) {
+        return iUserService.checkAnswer(username,question,answer);
+    }
 }
