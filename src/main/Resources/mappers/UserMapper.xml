@@ -155,4 +155,19 @@
     select count(1) from tmall_user
     where username=#{username}
   </select>
+  <select id="checkUserEmail" resultType="int" parameterType="string">
+    select count(1) from tmall_user
+    where email=#{email}
+  </select>
+
+  <select id="selectLogin" resultMap="BaseResultMap" parameterType="java.util.Map">
+  /*查询要遵从：要什么查什么*/
+  select
+  <include refid="Base_Column_List"/>
+  from tmall_user
+  where
+    username=#{username}
+    and
+    password=#{password}
+  </select>
 </mapper>

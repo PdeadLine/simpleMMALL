@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration scan="true" scanPeriod="60 seconds" debug="false">
+    <!--ch.qos.logback.core.ConsoleAppender控制台输出-->
     <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
         <encoding>UTF-8</encoding>
         <encoder>
@@ -9,7 +10,7 @@
             <level>DEBUG</level>
         </filter>
     </appender>
-
+    <!--ch.qos.logback.core.rolling.RollingFileAppender文件日志输出-->
     <appender name="mmall" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <!--<File>d:/mmalllog/mmall.log</File>-->
         <File>/developer/apache-tomcat-7.0.73/logs/mmall.log</File>
