@@ -10,8 +10,8 @@ public interface UserMapper {
     User selectByPrimaryKey(Integer id);
     int updateByPrimaryKeySelective(User record);
     int updateByPrimaryKey(User record);
-    int checkUserEmail(String email);
-    int checkUserName(String username);
+    int checkEmail(String email);
+    int checkUsername(String username);
     User selectLogin(@Param("username") String username, @Param("password") String password);
     String selectQuetionByUsername(String username);
     int checkAnswer(@Param("username") String username,@Param("question") String question, @Param("answer")String answer);

@@ -44,7 +44,7 @@ public class UserController {
      * @return
      */
     @ResponseBody
-    @RequestMapping(value="logout.do",method = RequestMethod.GET)
+    @RequestMapping(value="logout.do",method = RequestMethod.POST)
     public ServerResponse<String> logout(HttpSession session){
         session.removeAttribute(Const.CURRENT_USER);
         return ServerResponse.createBySuccess();
@@ -68,7 +68,7 @@ public class UserController {
      * @return
      */
     @ResponseBody
-    @RequestMapping(value = "check_valid.do",method = RequestMethod.GET)
+    @RequestMapping(value = "check_valid.do",method = RequestMethod.POST)
     public ServerResponse<String> checkValid(String str, String type) {
         return iUserService.checkValid(str,type);
     }
@@ -79,7 +79,7 @@ public class UserController {
      * @return
      */
     @ResponseBody
-    @RequestMapping(value = "get_user_info.do",method = RequestMethod.GET)
+    @RequestMapping(value = "get_user_info.do",method = RequestMethod.POST)
     public ServerResponse<User> getUserInfo(HttpSession session) {
         User user = (User) session.getAttribute(Const.CURRENT_USER);
         if (user != null) {
@@ -94,7 +94,7 @@ public class UserController {
      * @return
      */
     @ResponseBody
-    @RequestMapping(value = "forget_get_question.do",method = RequestMethod.GET)
+    @RequestMapping(value = "forget_get_question.do",method = RequestMethod.POST)
     public ServerResponse<String> forgetGetQuestion(String username) {
         return iUserService.selectQuestion(username);
     }
@@ -107,8 +107,9 @@ public class UserController {
      * @return
      */
     @ResponseBody
-    @RequestMapping(value = "forget_check_answer.do",method = RequestMethod.GET)
+    @RequestMapping(value = "forget_check_answer.do",method = RequestMethod.POST)
     public ServerResponse<String> forgetCheckAnswer(String username, String question, String answer) {
+        System.out.println(username+"usr"+question+"question"+answer+"answer");
         return iUserService.checkAnswer(username,question,answer);
     }
 
@@ -120,7 +121,7 @@ public class UserController {
      * @return
      */
     @ResponseBody
-    @RequestMapping(value = "forget_reset_password.do",method = RequestMethod.GET)
+    @RequestMapping(value = "forget_reset_password.do",method = RequestMethod.POST)
     public ServerResponse<String> forgetResetPassword(String username, String passwordNew, String forgetToken) {
         return iUserService.forgetResetPassword(username,passwordNew,forgetToken);
     }
@@ -133,7 +134,7 @@ public class UserController {
      * @return
      */
     @ResponseBody
-    @RequestMapping(value = "reset_password.do",method = RequestMethod.GET)
+    @RequestMapping(value = "reset_password.do",method = RequestMethod.POST)
     public ServerResponse<String> resetPassword(String passwordOld, String passwordNew, HttpSession session) {
         User user = (User) session.getAttribute(Const.CURRENT_USER);
         if (user == null) {
@@ -149,7 +150,7 @@ public class UserController {
      * @return
      */
     @ResponseBody
-    @RequestMapping(value = "update_information.do",method = RequestMethod.GET)
+    @RequestMapping(value = "update_information.do",method = RequestMethod.POST)
     public ServerResponse<User> updataInformation(HttpSession session, User user) {
        //判断是否登陆状态
         User currentUser = (User) session.getAttribute(Const.CURRENT_USER);
@@ -165,7 +166,7 @@ public class UserController {
         return response;
     }
     @ResponseBody
-    @RequestMapping(value = "get_information.do",method = RequestMethod.GET)
+    @RequestMapping(value = "get_information.do",method = RequestMethod.POST)
     public ServerResponse<User> getInformation(HttpSession session) {
         User currentUser = (User) session.getAttribute(Const.CURRENT_USER);
         if (currentUser == null) {

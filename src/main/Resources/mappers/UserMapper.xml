@@ -151,11 +151,11 @@
       update_time = now()
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <select id="checkUserName" resultType="int" parameterType="string">
+  <select id="checkUsername" resultType="int" parameterType="string">
     select count(1) from tmall_user
     where username=#{username}
   </select>
-  <select id="checkUserEmail" resultType="int" parameterType="string">
+  <select id="checkEmail" resultType="int" parameterType="string">
     select count(1) from tmall_user
     where email=#{email}
   </select>
@@ -187,15 +187,15 @@
   </select>
   <update id="updatePasswordByUsername"  parameterType="map">
     UPDATE tmall_user
-    SET password=#{psswordNew},update_time=now()
+    SET password=#{passwordNew},update_time=now()
     where username=#{username}
 
   </update>
   <select id="checkUserPassword" resultType="int" parameterType="map">
-    select COUNT (1)
+    select COUNT(1)
     from tmall_user
     where password=#{password}
-    and userId=#{userId}
+    and id=#{userId}
   </select>
   <select id="checkEmailByUserId" resultType="int" parameterType="map">
     select COUNT (1)
