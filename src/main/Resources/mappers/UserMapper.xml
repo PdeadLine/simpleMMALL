@@ -198,9 +198,9 @@
     and id=#{userId}
   </select>
   <select id="checkEmailByUserId" resultType="int" parameterType="map">
-    select COUNT (1)
+    select count(1)
     from tmall_user
     where email=#{email}
-    and userId=#{userId}
+    and id=#{userId}
   </select>
 </mapper>

@@ -1,6 +1,7 @@
 package com.tmall.service.impl;
 
 import com.tmall.common.Const;
+import com.tmall.common.ResponseCode;
 import com.tmall.common.ServerResponse;
 import com.tmall.common.TokenCache;
 import com.tmall.dao.UserMapper;
@@ -198,5 +199,13 @@ public class UserServiceImpl implements IUserService {
         }
         user.setPassword(StringUtils.EMPTY);
         return ServerResponse.createBySuccessData(user);
+    }
+
+    //校验是否管理员
+    public ServerResponse checkAdminRoll(User user) {
+        if (user!=null&&user.getRole().intValue() == Const.Role.ROLE_ADMIN) {
+            return ServerResponse.createBySuccess();
+        }
+        return ServerResponse.createByError();
     }
 }

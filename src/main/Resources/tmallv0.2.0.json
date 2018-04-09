@@ -1,0 +1,898 @@
+{
+  "front-version": "2.17.1",
+  "version": 3,
+  "nodes": [
+    {
+      "type": "Project",
+      "id": "1ec57f8d-4e61-441d-a712-309a760f880f",
+      "lastModified": "2018-04-09T15:52:57.958+08:00",
+      "name": "tmall"
+    },
+    {
+      "type": "Service",
+      "id": "04d246bf-099d-4b8f-b482-5e908c08cd03",
+      "lastModified": "2018-04-09T14:54:24.953+08:00",
+      "name": "category",
+      "parentId": "1ec57f8d-4e61-441d-a712-309a760f880f"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "requestBody": true,
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
+        "name": "POST"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded",
+          "items": [
+            {
+              "enabled": true,
+              "type": "Text",
+              "name": "parentId",
+              "value": "0"
+            },
+            {
+              "enabled": true,
+              "type": "Text",
+              "name": "categoryName",
+              "value": "资讯技术研发产品"
+            }
+          ]
+        },
+        "bodyType": "Form",
+        "autoSetLength": true
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "127.0.0.1:8080",
+        "path": "/manage/category/add_category.do"
+      },
+      "id": "32a2b1d7-570d-440d-bc86-260049af4210",
+      "lastModified": "2018-04-09T15:51:53.764+08:00",
+      "name": "add_category.do",
+      "headers": [
+        {
+          "enabled": true,
+          "name": "Content-Type",
+          "value": "application/x-www-form-urlencoded"
+        }
+      ],
+      "metaInfo": {},
+      "parentId": "04d246bf-099d-4b8f-b482-5e908c08cd03"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "requestBody": true,
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
+        "name": "POST"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded",
+          "items": [
+            {
+              "enabled": true,
+              "type": "Text",
+              "name": "categoryId",
+              "value": "0"
+            }
+          ]
+        },
+        "bodyType": "Form",
+        "autoSetLength": true
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "127.0.0.1:8080",
+        "path": "/manage/category/get_category.do"
+      },
+      "id": "873b5585-4141-4399-a2da-0d80bd9f633d",
+      "lastModified": "2018-04-09T15:52:20.763+08:00",
+      "name": "get_category.do",
+      "headers": [
+        {
+          "enabled": true,
+          "name": "Content-Type",
+          "value": "application/x-www-form-urlencoded"
+        }
+      ],
+      "metaInfo": {},
+      "parentId": "04d246bf-099d-4b8f-b482-5e908c08cd03"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "requestBody": true,
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
+        "name": "POST"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded",
+          "items": [
+            {
+              "enabled": true,
+              "type": "Text",
+              "name": "categoryId",
+              "value": "0"
+            }
+          ]
+        },
+        "bodyType": "Form",
+        "autoSetLength": true
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "127.0.0.1:8080",
+        "path": "/manage/category/get_deep_category.do"
+      },
+      "id": "75e2b170-a2ab-4a41-9c10-7fc4a32bff5c",
+      "lastModified": "2018-04-09T15:00:13.671+08:00",
+      "name": "get_deep_category.do",
+      "headers": [
+        {
+          "enabled": true,
+          "name": "Content-Type",
+          "value": "application/x-www-form-urlencoded"
+        }
+      ],
+      "metaInfo": {},
+      "parentId": "04d246bf-099d-4b8f-b482-5e908c08cd03"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "requestBody": true,
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
+        "name": "POST"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded",
+          "items": [
+            {
+              "enabled": true,
+              "type": "Text",
+              "name": "categoryId",
+              "value": "100031"
+            },
+            {
+              "enabled": true,
+              "type": "Text",
+              "name": "categoryName",
+              "value": "自行研发产品"
+            }
+          ]
+        },
+        "bodyType": "Form",
+        "autoSetLength": true
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "127.0.0.1:8080",
+        "path": "/manage/category/set_category_name.do"
+      },
+      "id": "0d6174c5-1252-432e-bb56-54c61b2a1e72",
+      "lastModified": "2018-04-09T15:52:57.958+08:00",
+      "name": "set_category_name",
+      "headers": [
+        {
+          "enabled": true,
+          "name": "Content-Type",
+          "value": "application/x-www-form-urlencoded"
+        }
+      ],
+      "metaInfo": {},
+      "parentId": "04d246bf-099d-4b8f-b482-5e908c08cd03"
+    },
+    {
+      "type": "Service",
+      "id": "7b463baa-e96d-4f88-a1e5-238f56f4729d",
+      "lastModified": "2018-04-08T09:27:34.167+08:00",
+      "name": "user",
+      "parentId": "1ec57f8d-4e61-441d-a712-309a760f880f"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "requestBody": true,
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
+        "name": "POST"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded",
+          "items": [
+            {
+              "enabled": true,
+              "type": "Text",
+              "name": "str",
+              "value": "lisi@sintai.com"
+            },
+            {
+              "enabled": true,
+              "type": "Text",
+              "name": "type",
+              "value": "email"
+            }
+          ]
+        },
+        "bodyType": "Form",
+        "autoSetLength": true
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "127.0.0.1:8080",
+        "path": "/user/check_valid.do"
+      },
+      "id": "aec304b7-4c3c-430d-98f4-05c6e94167e2",
+      "lastModified": "2018-04-08T16:51:54.355+08:00",
+      "name": "check_valid.do",
+      "headers": [
+        {
+          "enabled": true,
+          "name": "Content-Type",
+          "value": "application/x-www-form-urlencoded"
+        }
+      ],
+      "metaInfo": {},
+      "parentId": "7b463baa-e96d-4f88-a1e5-238f56f4729d"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "requestBody": true,
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
+        "name": "POST"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded",
+          "items": [
+            {
+              "enabled": true,
+              "type": "Text",
+              "name": "username",
+              "value": "admin"
+            },
+            {
+              "enabled": true,
+              "type": "Text",
+              "name": "question",
+              "value": "问题"
+            },
+            {
+              "enabled": true,
+              "type": "Text",
+              "name": "answer",
+              "value": "答案"
+            }
+          ]
+        },
+        "bodyType": "Form",
+        "autoSetLength": true
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "localhost:8080",
+        "path": "/user/forget_check_answer.do"
+      },
+      "id": "06c57c6d-09b5-4357-9fc0-5f1ce1239391",
+      "lastModified": "2018-04-09T09:37:14.756+08:00",
+      "name": "forget_check_answer.do",
+      "headers": [
+        {
+          "enabled": true,
+          "name": "Content-Type",
+          "value": "application/x-www-form-urlencoded"
+        }
+      ],
+      "metaInfo": {},
+      "parentId": "7b463baa-e96d-4f88-a1e5-238f56f4729d"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "requestBody": true,
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
+        "name": "POST"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded",
+          "items": [
+            {
+              "enabled": true,
+              "type": "Text",
+              "name": "username",
+              "value": "admin"
+            }
+          ]
+        },
+        "bodyType": "Form",
+        "autoSetLength": true
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "127.0.0.1:8080",
+        "path": "/user/forget_get_question.do"
+      },
+      "id": "99258a96-3985-4a27-9ccc-83ac359c9a7f",
+      "lastModified": "2018-04-09T09:36:33.965+08:00",
+      "name": "forget_get_question.do",
+      "headers": [
+        {
+          "enabled": true,
+          "name": "Content-Type",
+          "value": "application/x-www-form-urlencoded"
+        }
+      ],
+      "metaInfo": {},
+      "parentId": "7b463baa-e96d-4f88-a1e5-238f56f4729d"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "requestBody": true,
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
+        "name": "POST"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded",
+          "items": [
+            {
+              "enabled": true,
+              "type": "Text",
+              "name": "username",
+              "value": "admin"
+            },
+            {
+              "enabled": true,
+              "type": "Text",
+              "name": "passwordNew",
+              "value": "123456"
+            },
+            {
+              "enabled": true,
+              "type": "Text",
+              "name": "forgetToken",
+              "value": "c62c28f6-af09-47ba-b27e-68bdb19ae833"
+            }
+          ]
+        },
+        "bodyType": "Form",
+        "autoSetLength": true,
+        "textBody": "<!doctype html><html lang=\"en\"><head><title>HTTP Status 500 – Internal Server Error</title><style type=\"text/css\">h1 {font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;font-size:22px;} h2 {font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;font-size:16px;} h3 {font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;font-size:14px;} body {font-family:Tahoma,Arial,sans-serif;color:black;background-color:white;} b {font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;} p {font-family:Tahoma,Arial,sans-serif;background:white;color:black;font-size:12px;} a {color:black;} a.name {color:black;} .line {height:1px;background-color:#525D76;border:none;}</style></head><body><h1>HTTP Status 500 – Internal Server Error</h1><hr class=\"line\" /><p><b>Type</b> Exception Report</p><p><b>Message</b> Request processing failed; nested exception is org.mybatis.spring.MyBatisSystemException: nested exception is org.apache.ibatis.binding.BindingException: Parameter &#39;psswordNew&#39; not found. Available parameters are [param1, passwordNew, username, param2]</p><p><b>Description</b> The server encountered an unexpected condition that prevented it from fulfilling the request.</p><p><b>Exception</b></p><pre>org.springframework.web.util.NestedServletException: Request processing failed; nested exception is org.mybatis.spring.MyBatisSystemException: nested exception is org.apache.ibatis.binding.BindingException: Parameter &#39;psswordNew&#39; not found. Available parameters are [param1, passwordNew, username, param2]\n\torg.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:943)\n\torg.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:833)\n\tjavax.servlet.http.HttpServlet.service(HttpServlet.java:661)\n\torg.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:807)\n\tjavax.servlet.http.HttpServlet.service(HttpServlet.java:742)\n\torg.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:52)\n\torg.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:88)\n\torg.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:108)\n</pre><p><b>Root Cause</b></p><pre>org.mybatis.spring.MyBatisSystemException: nested exception is org.apache.ibatis.binding.BindingException: Parameter &#39;psswordNew&#39; not found. Available parameters are [param1, passwordNew, username, param2]\n\torg.mybatis.spring.MyBatisExceptionTranslator.translateExceptionIfPossible(MyBatisExceptionTranslator.java:79)\n\torg.mybatis.spring.SqlSessionTemplate$SqlSessionInterceptor.invoke(SqlSessionTemplate.java:447)\n\tcom.sun.proxy.$Proxy104.update(Unknown Source)\n\torg.mybatis.spring.SqlSessionTemplate.update(SqlSessionTemplate.java:295)\n\torg.apache.ibatis.binding.MapperMethod.execute(MapperMethod.java:62)\n\torg.apache.ibatis.binding.MapperProxy.invoke(MapperProxy.java:53)\n\tcom.sun.proxy.$Proxy105.updatePasswordByUsername(Unknown Source)\n\tcom.tmall.service.impl.UserServiceImpl.forgetResetPassword(UserServiceImpl.java:146)\n\tcom.tmall.controller.portal.UserController.forgetResetPassword(UserController.java:126)\n\tsun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)\n\tsun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)\n\tsun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\n\tjava.lang.reflect.Method.invoke(Method.java:498)\n\torg.springframework.web.method.support.InvocableHandlerMethod.invoke(InvocableHandlerMethod.java:214)\n\torg.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:132)\n\torg.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:104)\n\torg.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandleMethod(RequestMappingHandlerAdapter.java:748)\n\torg.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:689)\n\torg.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:83)\n\torg.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:945)\n\torg.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:876)\n\torg.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:931)\n\torg.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:833)\n\tjavax.servlet.http.HttpServlet.service(HttpServlet.java:661)\n\torg.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:807)\n\tjavax.servlet.http.HttpServlet.service(HttpServlet.java:742)\n\torg.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:52)\n\torg.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:88)\n\torg.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:108)\n</pre><p><b>Root Cause</b></p><pre>org.apache.ibatis.binding.BindingException: Parameter &#39;psswordNew&#39; not found. Available parameters are [param1, passwordNew, username, param2]\n\torg.apache.ibatis.binding.MapperMethod$ParamMap.get(MapperMethod.java:195)\n\torg.apache.ibatis.reflection.wrapper.MapWrapper.get(MapWrapper.java:45)\n\torg.apache.ibatis.reflection.MetaObject.getValue(MetaObject.java:122)\n\torg.apache.ibatis.scripting.defaults.DefaultParameterHandler.setParameters(DefaultParameterHandler.java:79)\n\torg.apache.ibatis.executor.statement.PreparedStatementHandler.parameterize(PreparedStatementHandler.java:93)\n\torg.apache.ibatis.executor.statement.RoutingStatementHandler.parameterize(RoutingStatementHandler.java:64)\n\torg.apache.ibatis.executor.SimpleExecutor.prepareStatement(SimpleExecutor.java:86)\n\torg.apache.ibatis.executor.SimpleExecutor.doUpdate(SimpleExecutor.java:49)\n\torg.apache.ibatis.executor.BaseExecutor.update(BaseExecutor.java:117)\n\torg.apache.ibatis.executor.CachingExecutor.update(CachingExecutor.java:76)\n\tsun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)\n\tsun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)\n\tsun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\n\tjava.lang.reflect.Method.invoke(Method.java:498)\n\torg.apache.ibatis.plugin.Plugin.invoke(Plugin.java:63)\n\tcom.sun.proxy.$Proxy107.update(Unknown Source)\n\torg.apache.ibatis.session.defaults.DefaultSqlSession.update(DefaultSqlSession.java:198)\n\tsun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)\n\tsun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)\n\tsun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\n\tjava.lang.reflect.Method.invoke(Method.java:498)\n\torg.mybatis.spring.SqlSessionTemplate$SqlSessionInterceptor.invoke(SqlSessionTemplate.java:434)\n\tcom.sun.proxy.$Proxy104.update(Unknown Source)\n\torg.mybatis.spring.SqlSessionTemplate.update(SqlSessionTemplate.java:295)\n\torg.apache.ibatis.binding.MapperMethod.execute(MapperMethod.java:62)\n\torg.apache.ibatis.binding.MapperProxy.invoke(MapperProxy.java:53)\n\tcom.sun.proxy.$Proxy105.updatePasswordByUsername(Unknown Source)\n\tcom.tmall.service.impl.UserServiceImpl.forgetResetPassword(UserServiceImpl.java:146)\n\tcom.tmall.controller.portal.UserController.forgetResetPassword(UserController.java:126)\n\tsun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)\n\tsun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)\n\tsun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\n\tjava.lang.reflect.Method.invoke(Method.java:498)\n\torg.springframework.web.method.support.InvocableHandlerMethod.invoke(InvocableHandlerMethod.java:214)\n\torg.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:132)\n\torg.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:104)\n\torg.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandleMethod(RequestMappingHandlerAdapter.java:748)\n\torg.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:689)\n\torg.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:83)\n\torg.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:945)\n\torg.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:876)\n\torg.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:931)\n\torg.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:833)\n\tjavax.servlet.http.HttpServlet.service(HttpServlet.java:661)\n\torg.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:807)\n\tjavax.servlet.http.HttpServlet.service(HttpServlet.java:742)\n\torg.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:52)\n\torg.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:88)\n\torg.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:108)\n</pre><p><b>Note</b> The full stack trace of the root cause is available in the server logs.</p><hr class=\"line\" /><h3>Apache Tomcat/8.5.28</h3></body></html>"
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "127.0.0.1:8080",
+        "path": "/user/forget_reset_password.do"
+      },
+      "id": "3c03c92b-46a9-4725-ae8f-e4a13d5150bc",
+      "lastModified": "2018-04-09T09:37:41.557+08:00",
+      "name": "forget_reset_password.do",
+      "headers": [
+        {
+          "enabled": true,
+          "name": "Content-Type",
+          "value": "application/x-www-form-urlencoded"
+        }
+      ],
+      "metaInfo": {},
+      "parentId": "7b463baa-e96d-4f88-a1e5-238f56f4729d"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "requestBody": true,
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
+        "name": "POST"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded",
+          "items": []
+        },
+        "bodyType": "Form",
+        "autoSetLength": true
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "127.0.0.1:8080",
+        "path": "/user/get_information.do"
+      },
+      "id": "b162c5df-d37c-4f60-90f0-62b735354e56",
+      "lastModified": "2018-04-08T16:43:56.275+08:00",
+      "name": "get_information.do",
+      "headers": [
+        {
+          "enabled": true,
+          "name": "Content-Type",
+          "value": "application/x-www-form-urlencoded"
+        }
+      ],
+      "metaInfo": {},
+      "parentId": "7b463baa-e96d-4f88-a1e5-238f56f4729d"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "requestBody": true,
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
+        "name": "POST"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded",
+          "items": []
+        },
+        "bodyType": "Text",
+        "autoSetLength": true
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "127.0.0.1:8080",
+        "path": "/user/get_user_info.do"
+      },
+      "id": "3152b71e-49b0-451a-baf2-b9ef9036cdaa",
+      "lastModified": "2018-04-08T13:10:12.586+08:00",
+      "name": "get_user_info.do",
+      "headers": [
+        {
+          "enabled": true,
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "metaInfo": {},
+      "parentId": "7b463baa-e96d-4f88-a1e5-238f56f4729d"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "requestBody": true,
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
+        "name": "POST"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded",
+          "items": [
+            {
+              "enabled": true,
+              "type": "Text",
+              "name": "username",
+              "value": "admin"
+            },
+            {
+              "enabled": true,
+              "type": "Text",
+              "name": "password",
+              "value": "admin"
+            }
+          ]
+        },
+        "bodyType": "Form",
+        "autoSetLength": true
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "127.0.0.1:8080",
+        "path": "/user/login.do"
+      },
+      "id": "476b593b-def3-46b4-99d9-ae712cb17294",
+      "lastModified": "2018-04-09T15:27:30.618+08:00",
+      "name": "login.do",
+      "headers": [
+        {
+          "enabled": true,
+          "name": "Content-Type",
+          "value": "application/x-www-form-urlencoded"
+        }
+      ],
+      "metaInfo": {},
+      "parentId": "7b463baa-e96d-4f88-a1e5-238f56f4729d"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "requestBody": true,
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
+        "name": "POST"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded",
+          "items": []
+        },
+        "bodyType": "Form",
+        "autoSetLength": true
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "127.0.0.1:8080",
+        "path": "/user/logout.do"
+      },
+      "id": "750b68be-5670-4881-b22a-9756578e241b",
+      "lastModified": "2018-04-09T15:16:44.436+08:00",
+      "name": "logout.do",
+      "headers": [
+        {
+          "enabled": true,
+          "name": "Content-Type",
+          "value": "application/x-www-form-urlencoded"
+        }
+      ],
+      "metaInfo": {},
+      "parentId": "7b463baa-e96d-4f88-a1e5-238f56f4729d"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "requestBody": true,
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
+        "name": "POST"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded",
+          "items": [
+            {
+              "enabled": true,
+              "type": "Text",
+              "name": "username",
+              "value": "lisi"
+            },
+            {
+              "enabled": true,
+              "type": "Text",
+              "name": "password",
+              "value": "123456"
+            }
+          ]
+        },
+        "bodyType": "Form",
+        "autoSetLength": true
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "127.0.0.1:8080",
+        "path": "/manage/user/lgoin.do"
+      },
+      "id": "68913a51-2bcb-45f7-9858-0238e5b6fb33",
+      "lastModified": "2018-04-09T14:54:16.710+08:00",
+      "name": "manage_login.do",
+      "headers": [
+        {
+          "enabled": true,
+          "name": "Content-Type",
+          "value": "application/x-www-form-urlencoded"
+        }
+      ],
+      "metaInfo": {},
+      "parentId": "7b463baa-e96d-4f88-a1e5-238f56f4729d"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "requestBody": true,
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
+        "name": "POST"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded",
+          "items": [
+            {
+              "enabled": true,
+              "type": "Text",
+              "name": "username",
+              "value": "admin"
+            },
+            {
+              "enabled": true,
+              "type": "Text",
+              "name": "password",
+              "value": "admin"
+            },
+            {
+              "enabled": true,
+              "type": "Text",
+              "name": "email",
+              "value": "admin@admin.com"
+            },
+            {
+              "enabled": true,
+              "type": "Text",
+              "name": "phone",
+              "value": "1380000138"
+            },
+            {
+              "enabled": true,
+              "type": "Text",
+              "name": "question",
+              "value": "答案"
+            },
+            {
+              "enabled": true,
+              "type": "Text",
+              "name": "answer",
+              "value": "问题"
+            }
+          ]
+        },
+        "bodyType": "Form",
+        "autoSetLength": true
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "127.0.0.1:8080",
+        "path": "/user/register.do"
+      },
+      "id": "4f9006d6-ab0c-42f4-a742-57553bed3b16",
+      "lastModified": "2018-04-09T15:26:59.187+08:00",
+      "name": "register.do",
+      "headers": [
+        {
+          "enabled": true,
+          "name": "Content-Type",
+          "value": "application/x-www-form-urlencoded"
+        }
+      ],
+      "metaInfo": {},
+      "parentId": "7b463baa-e96d-4f88-a1e5-238f56f4729d"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "requestBody": true,
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
+        "name": "POST"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded",
+          "items": [
+            {
+              "enabled": true,
+              "type": "Text",
+              "name": "passwordOld",
+              "value": "654321"
+            },
+            {
+              "enabled": true,
+              "type": "Text",
+              "name": "passwordNew",
+              "value": "123456"
+            }
+          ]
+        },
+        "bodyType": "Form",
+        "autoSetLength": true
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "127.0.0.1:8080",
+        "path": "/user/reset_password.do"
+      },
+      "id": "0faf4f3e-d794-4d13-b64f-c9aa184f9f0f",
+      "lastModified": "2018-04-08T15:25:32.903+08:00",
+      "name": "reset_password",
+      "headers": [
+        {
+          "enabled": true,
+          "name": "Content-Type",
+          "value": "application/x-www-form-urlencoded"
+        }
+      ],
+      "metaInfo": {},
+      "parentId": "7b463baa-e96d-4f88-a1e5-238f56f4729d"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "requestBody": true,
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
+        "name": "POST"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded",
+          "items": [
+            {
+              "enabled": true,
+              "type": "Text",
+              "name": "email",
+              "value": "lisi2@sintai.com"
+            },
+            {
+              "enabled": true,
+              "type": "Text",
+              "name": "phone",
+              "value": "10086"
+            },
+            {
+              "enabled": true,
+              "type": "Text",
+              "name": "question",
+              "value": "sintai"
+            },
+            {
+              "enabled": true,
+              "type": "Text",
+              "name": "answer",
+              "value": "sintai"
+            }
+          ]
+        },
+        "bodyType": "Form",
+        "autoSetLength": true
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "127.0.0.1:8080",
+        "path": "/user/update_information.do"
+      },
+      "id": "1a1ae34d-657f-465c-88e3-3cc7eaef6b1e",
+      "lastModified": "2018-04-09T08:26:09.963+08:00",
+      "name": "update_information.do",
+      "headers": [
+        {
+          "enabled": true,
+          "name": "Content-Type",
+          "value": "application/x-www-form-urlencoded"
+        }
+      ],
+      "metaInfo": {},
+      "parentId": "7b463baa-e96d-4f88-a1e5-238f56f4729d"
+    }
+  ]
+}
