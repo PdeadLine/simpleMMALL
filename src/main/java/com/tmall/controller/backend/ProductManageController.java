@@ -77,7 +77,7 @@ public class ProductManageController {
      */
     @ResponseBody
     @RequestMapping("list.do")
-    public ServerResponse list(@RequestParam(value = "pageNum",defaultValue = "1") Integer pageNum,
+    public ServerResponse getProductList(@RequestParam(value = "pageNum",defaultValue = "1") Integer pageNum,
                                @RequestParam(value = "pageSize",defaultValue = "10")Integer pageSize,
                                HttpSession session) {
         User user = (User) session.getAttribute(Const.CURRENT_USER);
@@ -87,6 +87,22 @@ public class ProductManageController {
         if (iUserService.checkAdminRoll(user).isSuccess()) {
             //业务逻辑处理
             return null;
+        }
+        return ServerResponse.createByErrorMessage("非管理员用户，无权限操作");
+    }
+
+    @ResponseBody
+    @RequestMapping("detial.do")
+    public ServerResponse getDetial(Integer productId,
+                               HttpSession session) {
+        User user = (User) session.getAttribute(Const.CURRENT_USER);
+        if (user == null) {
+            return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),ResponseCode.NEED_LOGIN.getDesc());
+        }
+        if (iUserService.checkAdminRoll(user).isSuccess()) {
+            //业务逻辑处理
+
+            return iProductService.manageProductDetial(productId);
         }
         return ServerResponse.createByErrorMessage("非管理员用户，无权限操作");
     }
