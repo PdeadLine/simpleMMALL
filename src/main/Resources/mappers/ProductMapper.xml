@@ -176,4 +176,24 @@
       update_time = #{updateTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <select id="selectList" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    FROM tmall_product
+    ORDER BY id ASC;
+  </select>
+
+  <select id="selectByNameAndProductId" resultMap="BaseResultMap" parameterType="map">
+    select
+    <include refid="Base_Column_List"/>
+    FROM tmall_product
+    <where>
+    <if test="productName !=null">
+      and name LIKE #{productName}
+    </if>
+    <if test="productId !=null">
+      and id=#{productId}
+    </if>
+    </where>
+  </select>
 </mapper>

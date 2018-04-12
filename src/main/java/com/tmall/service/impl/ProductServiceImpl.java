@@ -1,5 +1,8 @@
 package com.tmall.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import com.google.common.collect.Lists;
 import com.tmall.common.ResponseCode;
 import com.tmall.common.ServerResponse;
 import com.tmall.dao.CategoryMapper;
@@ -10,9 +13,12 @@ import com.tmall.service.IProductService;
 import com.tmall.util.DateTimeUtill;
 import com.tmall.util.PropertiesUtil;
 import com.tmall.vo.ProductDetialVo;
+import com.tmall.vo.ProductListVo;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * create by sintai
@@ -111,4 +117,57 @@ public class ProductServiceImpl implements IProductService {
         productDetialVo.setUpdateTime(DateTimeUtill.dateToString(product.getUpdateTime()));
         return productDetialVo;
     }
+
+
+    public ServerResponse<PageInfo> getProductList(Integer pageNum,Integer pageSize) {
+        //分页步骤：
+        //starpage;填充自己的sql逻辑;pageHelper收尾--pageInfo
+        PageHelper.startPage(pageNum, pageSize);
+        List<Product> productList = productMapper.selectList();
+        List<ProductListVo> productListVoList= Lists.newArrayList();
+        for (Product productItem : productList) {
+            ProductListVo productListVo = assembleProductListVo(productItem);
+            productListVoList.add(productListVo);
+        }
+        PageInfo pageResult = new PageInfo(productList);
+        pageResult.setList(productListVoList);
+        return  ServerResponse.createBySuccessData(pageResult);
+
+    }
+
+    /**
+     * 装配,组合
+     * @param product
+     * @return
+     */
+    private ProductListVo assembleProductListVo(Product product) {
+        ProductListVo productListVo= new ProductListVo();
+        productListVo.setCategoryId(product.getId());
+        productListVo.setCategoryId(product.getCategoryId());
+        productListVo.setName(product.getName());
+        productListVo.setSubtitle(product.getSubtitle());
+        productListVo.setMainImage(product.getMainImage());
+        productListVo.setPrice(product.getPrice());
+        productListVo.setStatus(product.getStatus());
+        productListVo.setImgageHost(PropertiesUtil.getProperty("","http://192.168.10.171/"));
+        return productListVo;
+    }
+
+    public ServerResponse<PageInfo> productSearch(String productName,Integer productId,Integer pageNum,Integer pageSize) {
+        //startpage-businessLogic-pageInfo
+        PageHelper.startPage(pageNum, pageSize);
+        if (StringUtils.isNotBlank(productName)) {
+           productName= new StringBuilder().append("%").append(productName).append("%").toString();
+        }
+        List<Product> productList = productMapper.selectByNameAndProductId(productName,productId);
+        List<ProductListVo> productListVoList= Lists.newArrayList();
+        for (Product productItem : productList) {
+            ProductListVo productListVo = assembleProductListVo(productItem);
+            productListVoList.add(productListVo);
+        }
+        PageInfo pageResult = new PageInfo(productList);
+        pageResult.setList(productListVoList);
+        return  ServerResponse.createBySuccessData(pageResult);
+    }
 }
+

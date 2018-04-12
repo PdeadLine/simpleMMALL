@@ -1,5 +1,6 @@
 package com.tmall.service;
 
+import com.github.pagehelper.PageInfo;
 import com.tmall.common.ServerResponse;
 import com.tmall.pojo.Product;
 import com.tmall.vo.ProductDetialVo;
@@ -14,4 +15,9 @@ public interface IProductService {
     public ServerResponse<String> setSaleStauts(Integer productId, Integer status);
 
     public ServerResponse<ProductDetialVo> manageProductDetial(Integer productId);
+
+    public ServerResponse<PageInfo> getProductList(Integer pageNum, Integer pageSize);
+
+    public ServerResponse<PageInfo> productSearch(String productName, Integer productId, Integer pageNum, Integer pageSize);
+
 }
