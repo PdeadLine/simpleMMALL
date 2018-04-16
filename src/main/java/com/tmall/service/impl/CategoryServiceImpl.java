@@ -67,7 +67,7 @@ public class CategoryServiceImpl implements ICategoryService{
      * @param categoryId
      * @return
      */
-    public ServerResponse selectCategoryAndChildrenById(Integer categoryId) {
+    public ServerResponse<List<Integer>> selectCategoryAndChildrenById(Integer categoryId) {
         Set<Category> categorySet = new HashSet<Category>();
         //categorySet中返回了所有该节点和子节点所有信息
         findChildCategory(categorySet, categoryId);
