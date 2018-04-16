@@ -2,6 +2,8 @@ package com.tmall.dao;
 
 import com.tmall.pojo.Cart;
 
+import java.util.List;
+
 public interface CartMapper {
     int deleteByPrimaryKey(Integer id);
 
@@ -16,4 +18,8 @@ public interface CartMapper {
     int updateByPrimaryKey(Cart record);
 
     Cart selectCartByUserIdProductId(Integer userId, Integer productId);
+
+    List<Cart> selectCartByUserId(Integer userId);
+
+    int selectCartProductCheckedStatusByUserId(Integer userId);
 }
