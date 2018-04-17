@@ -9,4 +9,8 @@ import com.tmall.vo.CartVo;
 
 public interface ICartService {
     public ServerResponse<CartVo> add(Integer userId, Integer productId, Integer count);
+
+    public ServerResponse<CartVo> updateCart(Integer userId, Integer productId, Integer count);
+
+    public ServerResponse<CartVo> deleteProduct(Integer userId, String productIds);
 }

@@ -1,6 +1,7 @@
 package com.tmall.dao;
 
 import com.tmall.pojo.Cart;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -22,4 +23,6 @@ public interface CartMapper {
     List<Cart> selectCartByUserId(Integer userId);
 
     int selectCartProductCheckedStatusByUserId(Integer userId);
+
+    int deleteByUserIDProductIds(@Param("userId") Integer userId, @Param("productIdList")List<String> productIdList);
 }
