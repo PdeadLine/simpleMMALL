@@ -18,6 +18,7 @@ import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpSession;
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -162,5 +163,15 @@ public class CartServiceImpl implements ICartService {
             cartMapper.deleteByUserIDProductIds(userId, productList);
             CartVo cartVo = this.getCartVoLimit(userId);
             return ServerResponse.createBySuccessData(cartVo);
+    }
+
+    public ServerResponse<CartVo> selectOrUnSelect(Integer userId,Integer checked,Integer productId) {
+        cartMapper.checkedOrUncheckedAll(userId, checked, productId);
+        return this.list(userId);
+    }
+
+    public ServerResponse<Integer> getCartProductCount(Integer userId) {
+        int resultCount = cartMapper.selectCartProductCount(userId);
+        return ServerResponse.createBySuccessData(resultCount);
     }
 }

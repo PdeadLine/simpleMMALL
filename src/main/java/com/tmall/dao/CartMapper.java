@@ -25,4 +25,9 @@ public interface CartMapper {
     int selectCartProductCheckedStatusByUserId(Integer userId);
 
     int deleteByUserIDProductIds(@Param("userId") Integer userId, @Param("productIdList")List<String> productIdList);
+
+    int checkedOrUncheckedAll(@Param("userId")Integer userId, @Param("checked")Integer checked,@Param("productId")Integer productId);
+
+    //注意该sql语句处理空值的方法
+    int selectCartProductCount(Integer userId);
 }
