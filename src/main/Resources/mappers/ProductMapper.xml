@@ -180,7 +180,7 @@
     select
     <include refid="Base_Column_List"/>
     FROM tmall_product
-    ORDER BY id ASC;
+    ORDER BY id ASC /*这里经常出现错误，因为使用了分页查询，所以后面不要接“;”*/
   </select>
 
   <select id="selectByNameAndProductId" resultMap="BaseResultMap" parameterType="map">

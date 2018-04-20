@@ -126,7 +126,7 @@ public class ProductServiceImpl implements IProductService {
     public ServerResponse<PageInfo> getProductList(Integer pageNum,Integer pageSize) {
         //分页步骤：
         //starpage;填充自己的sql逻辑;pageHelper收尾--pageInfo
-        PageHelper.startPage(pageNum, pageSize);
+        PageHelper.startPage(pageNum,pageSize);
         List<Product> productList = productMapper.selectList();
         List<ProductListVo> productListVoList= Lists.newArrayList();
         for (Product productItem : productList) {
@@ -161,7 +161,7 @@ public class ProductServiceImpl implements IProductService {
         //startpage-businessLogic-pageInfo
         PageHelper.startPage(pageNum, pageSize);
         if (StringUtils.isNotBlank(productName)) {
-           productName= new StringBuilder().append("%").append(productName).append("%").toString();
+            productName= new StringBuilder().append("%").append(productName).append("%").toString();
         }
         List<Product> productList = productMapper.selectByNameAndProductId(productName,productId);
         List<ProductListVo> productListVoList= Lists.newArrayList();
@@ -203,7 +203,7 @@ public class ProductServiceImpl implements IProductService {
                 PageHelper.startPage(pageNum, pageSize);
                 List<ProductListVo> productListVoList=Lists.newArrayList();
                 PageInfo pageInfo = new PageInfo(productListVoList);
-               return ServerResponse.createBySuccessData(pageInfo);
+                return ServerResponse.createBySuccessData(pageInfo);
             }
         }
         categoryIdList = iCategoryService.selectCategoryAndChildrenById(categoryId).getData();//之前的泛型要加上<List<Integer>>
@@ -221,7 +221,7 @@ public class ProductServiceImpl implements IProductService {
             }
         }
         List<Product> productList = productMapper.selectByNameAndCategoryIds(StringUtils.isBlank(keyword)?null:keyword,
-                                    categoryIdList.size()==0?null:categoryIdList);//条件表达式，判断参数是否为空值
+                categoryIdList.size()==0?null:categoryIdList);//条件表达式，判断参数是否为空值
         //装配VO
         List<ProductListVo> productListVoList=Lists.newArrayList();
         for (Product productItem : productList) {
