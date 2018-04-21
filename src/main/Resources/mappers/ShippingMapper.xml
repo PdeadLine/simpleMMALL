@@ -180,7 +180,7 @@
   <delete id="deleteByShippingIdUserId" parameterType="map">
     delete
     from tmall_shipping
-    where user_id=#{userID}
+    where user_id=#{userId}
     and id=#{shippingId}
   </delete>
   <update id="updateByShipping" parameterType="com.tmall.pojo.Shipping">

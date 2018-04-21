@@ -159,7 +159,7 @@
   </update>
   <select id="selectCartProductCount" resultType="int" parameterType="int">
     select
-    NULLIF (sum(quantity)DEFAULT 0) as count
+    IFNULL(sum(quantity),0) as count
     from tmall_cart
     where user_id=#{userId}
   </select>

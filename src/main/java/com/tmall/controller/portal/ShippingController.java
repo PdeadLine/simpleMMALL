@@ -19,7 +19,8 @@ import javax.servlet.http.HttpSession;
  * create by sintai
  */
 
-@Controller("/shipping/")
+@Controller
+@RequestMapping("/shipping/")
 public class ShippingController {
     @Autowired
     private IShippingService iShippingService;
@@ -37,11 +38,12 @@ public class ShippingController {
         if (user == null) {
             return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), ResponseCode.NEED_LOGIN.getDesc());
         }
+
         return iShippingService.add(user.getId(),shipping);
     }
 
     @ResponseBody
-    @RequestMapping("delete.do")
+    @RequestMapping("del.do")
     public ServerResponse add(HttpSession session, Integer shippingId) {
         User user = (User) session.getAttribute(Const.CURRENT_USER);
         if (user == null) {

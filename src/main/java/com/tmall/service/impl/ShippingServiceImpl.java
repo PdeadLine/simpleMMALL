@@ -9,6 +9,7 @@ import com.tmall.dao.ShippingMapper;
 import com.tmall.pojo.Shipping;
 import com.tmall.service.IShippingService;
 import org.apache.commons.collections.map.HashedMap;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,6 +20,7 @@ import java.util.Map;
  */
 @Service("iShippingService")
 public class ShippingServiceImpl implements IShippingService {
+    @Autowired
     private ShippingMapper shippingMapper;
 
     public ServerResponse add(Integer userId,Shipping shipping) {
