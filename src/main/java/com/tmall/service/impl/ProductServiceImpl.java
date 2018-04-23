@@ -19,6 +19,7 @@ import com.tmall.vo.ProductListVo;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,10 +41,10 @@ public class ProductServiceImpl implements IProductService {
      * @param product
      * @return
      */
-    public ServerResponse<String> saveOrUpdateProduct(Product product) {
+    public ServerResponse<String> saveOrUpdateProduct( Product product) {
         if (product != null) {
             if (StringUtils.isNotBlank(product.getSubImages())) {
-                String[] subImageArray=product.getMainImage().split(",");
+                String[] subImageArray=product.getSubImages().split(",");
                 if (subImageArray.length > 0) {
                     product.setMainImage(subImageArray[0]);
                 }
