@@ -1,6 +1,7 @@
 package com.tmall.dao;
 
 import com.tmall.pojo.Order;
+import org.apache.ibatis.annotations.Param;
 
 public interface OrderMapper {
     int deleteByPrimaryKey(Integer id);
@@ -14,4 +15,6 @@ public interface OrderMapper {
     int updateByPrimaryKeySelective(Order record);
 
     int updateByPrimaryKey(Order record);
+    //多参数，就要使用@param注解
+    Order selectByUserIdAndOrderNo(@Param("userId") Integer userId, @Param("orderNo") long orderNod);
 }
