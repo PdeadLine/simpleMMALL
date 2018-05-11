@@ -86,4 +86,24 @@ public class OrderController {
         return Const.AlipayCallBack.RESPONSE_FAILED;
     }
 
+    /**
+     * 查询订单状态
+     * @param session
+     * @param orderNo
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("query_order_pay_status.do")
+    public ServerResponse<Boolean> queryOrderPayStatus(HttpSession session, long orderNo) {
+        User user = (User) session.getAttribute(Const.CURRENT_USER);
+        if (user == null) {
+            return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),ResponseCode.NEED_LOGIN.getDesc());
+        }
+        ServerResponse serverResponse = iOrderService.queryOrderPayStatus(user.getId(), orderNo);
+        if (serverResponse.isSuccess()) {
+            return ServerResponse.createBySuccessData(true);
+        }
+        return ServerResponse.createBySuccessData(false);
+    }
+
 }
