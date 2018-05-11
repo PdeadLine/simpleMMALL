@@ -38,13 +38,59 @@ public class Const {
             this.code=code;
             this.value=value;
         }
-
         public int getCode() {
             return code;
         }
-
         public String getValue() {
             return value;
         }
     }
+    //订单状态枚举类
+    public enum OrderStatusEnum{
+        CANCELED(0,"已取消"),
+        NO_PAY(10,"未付款"),
+        PAID(20,"已支付"),
+        SHIPPED(40,"已发货"),
+        ORDER_SUCCESS(50,"订单已完成"),
+        ORDER_CLOSE(60,"订单关闭");
+        OrderStatusEnum(int code,String value) {
+            this.value=value;
+            this.code=code;
+        }
+        public String getValue() {
+            return value;
+        }
+        public int getCode() {
+            return code;
+        }
+        private String value;
+        private int code;
+    }
+
+    //交易状态常量
+    public interface AlipayCallBack{
+        String TRADE_STATUS_WAIT_BUYER_PAY = "WAIT_BUYER_PAY";
+        String TRADE_STATUS_TRADE_SUCCESS = "TRADE_SUCCESS";
+
+        String RESPONSE_SUCCESS = "success";
+        String RESPONSE_FAILED = "failed";
+    }
+    //付款平台枚举类
+    public enum PayPlatformEnum{
+        ALIPAY(1,"支付宝")
+        ;
+        PayPlatformEnum(int code,String value) {
+            this.value=value;
+            this.code=code;
+        }
+        public String getValue() {
+            return value;
+        }
+        public int getCode() {
+            return code;
+        }
+        private String value;
+        private int code;
+    }
+
 }

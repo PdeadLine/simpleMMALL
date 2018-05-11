@@ -206,4 +206,11 @@
     where user_id=#{userId}
     and order_no=#{orderNo}
   </select>
+
+  <select id="selectByOrderNo" resultMap="BaseResultMap" parameterType="long">
+    select
+    <include refid="Base_Column_List"/>
+    from tmall_order
+    where order_no=#{orderNo}
+  </select>
 </mapper>

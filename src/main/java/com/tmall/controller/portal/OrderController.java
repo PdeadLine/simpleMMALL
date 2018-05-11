@@ -57,7 +57,7 @@ public class OrderController {
 
         Map requestParams=request.getParameterMap();
         //这里使用迭代器iterator  --技巧---map的迭代
-        for (Iterator iter=requestParams.keySet().iterator();iter.hasNext()) {
+        for (Iterator iter=requestParams.keySet().iterator();iter.hasNext();) {
             String name =(String)iter.next();
             String[] values = (String[]) requestParams.get(name);
             String valueStr = "";
@@ -76,9 +76,14 @@ public class OrderController {
                 return ServerResponse.createByErrorMessage("非法请求，验证未通过，再恶意请求就关闭你的电脑！！！");
             }
         } catch (AlipayApiException e) {
-           logger.error("支付宝验证回调一场",e);
+           logger.error("支付宝验证回调异常",e);
         }
         //todo 验证各种数据
+        ServerResponse serverResponse = iOrderService.aliCallBack(params);
+        if (serverResponse.isSuccess()) {
+            return Const.AlipayCallBack.RESPONSE_SUCCESS;
+        }
+        return Const.AlipayCallBack.RESPONSE_FAILED;
     }
 
 }

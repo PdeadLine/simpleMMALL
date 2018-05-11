@@ -12,15 +12,20 @@ import com.alipay.demo.trade.service.impl.AlipayTradeServiceImpl;
 import com.alipay.demo.trade.utils.ZxingUtils;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import com.tmall.common.Const;
 import com.tmall.common.ServerResponse;
 import com.tmall.dao.OrderItemMapper;
 import com.tmall.dao.OrderMapper;
+import com.tmall.dao.PayInfoMapper;
 import com.tmall.pojo.Order;
 import com.tmall.pojo.OrderItem;
+import com.tmall.pojo.PayInfo;
 import com.tmall.service.IOrderService;
 import com.tmall.util.BigDecimalUtil;
+import com.tmall.util.DateTimeUtill;
 import com.tmall.util.FTPUtil;
 import com.tmall.util.PropertiesUtil;
+import net.sf.jsqlparser.schema.Server;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,6 +44,8 @@ import java.util.Map;
  */
 @Service("iOrderService")
 public class OrderServiceImpl implements IOrderService {
+   @Autowired
+   private PayInfoMapper payInfoMapper;
     @Autowired
     private OrderMapper orderMapper;
     @Autowired
@@ -179,5 +186,36 @@ public class OrderServiceImpl implements IOrderService {
             }
             log.info("body:" + response.getBody());
         }
+    }
+
+    public ServerResponse aliCallBack(Map<String,String> params ) {
+        Long orderNo = Long.parseLong(params.get("out_trade_no"));//商家订单
+        String tradeNo = params.get("trade_no");//支付宝订单
+        String tradeStatus = params.get("trade_status");//付款状态
+
+        Order order = orderMapper.selectByOrderNo(orderNo);
+        if (order == null) {
+            return ServerResponse.createByErrorMessage("非商城订单，回调忽略");
+        }
+        //重复通知？
+        if (order.getStatus()>= Const.OrderStatusEnum.PAID.getCode()) {
+            return ServerResponse.createBySuccessMessage("支付宝重复调用");
+        }
+        if (Const.AlipayCallBack.TRADE_STATUS_TRADE_SUCCESS.equals(tradeStatus)) {
+            order.setPaymentTime(DateTimeUtill.strToDate(params.get("gmt_payment")));//字符串转时间
+            order.setStatus(Const.OrderStatusEnum.PAID.getCode());
+            orderMapper.updateByPrimaryKeySelective(order);
+        }
+       //新增订单交易记录到数据库
+        PayInfo payInfo = new PayInfo();
+        payInfo.setUserId(order.getUserId());
+        payInfo.setOrderNo(order.getOrderNo());
+        payInfo.setPayPlatform(Const.PayPlatformEnum.ALIPAY.getCode());
+        payInfo.setPlatformNumber(tradeNo);
+        payInfo.setPlatformStatus(tradeStatus);
+
+        payInfoMapper.insert(payInfo);
+
+        return ServerResponse.createBySuccess();
     }
 }
