@@ -31,6 +31,42 @@ public class OrderController {
 
     @Autowired
     private IOrderService iOrderService;
+
+
+    @ResponseBody
+    @RequestMapping("create.do")
+    public ServerResponse createOrder(HttpSession session,Integer shippingId) {
+        User user = (User) session.getAttribute(Const.CURRENT_USER);
+        if (user == null) {
+            return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),ResponseCode.NEED_LOGIN.getDesc());
+        }
+        return iOrderService.;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     /**
      *  支付宝付款
      * @param session

@@ -93,4 +93,22 @@ public class Const {
         private int code;
     }
 
+    public enum PaymentTypeEnum{
+        ON_LINE_PAY(1,"在线支付")
+        ;
+        PaymentTypeEnum(int code,String value) {
+            this.value=value;
+            this.code=code;
+        }
+        public String getValue() {
+            return value;
+        }
+        public int getCode() {
+            return code;
+        }
+        private String value;
+        private int code;
+
+    }
+
 }

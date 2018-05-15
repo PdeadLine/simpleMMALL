@@ -35,7 +35,11 @@ public class FileServiceImpl implements IFileService{
         File targetFile = new File(path, uploadFileName);
         //文件上传成功。。。
         // 将target文件上传到FTP文件服务器上
-        FTPUtil.uploadFile(Lists.newArrayList(targetFile));
+        try {
+            FTPUtil.uploadFile(Lists.newArrayList(targetFile));
+        } catch (IOException e) {
+            logger.error("上传失败",e);
+        }
         //删除upload
         targetFile.delete();//删除此抽象路径名表示的文件或目录--若目录下存在文件则不可删除
         try {

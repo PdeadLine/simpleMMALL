@@ -29,5 +29,7 @@ public interface CartMapper {
     int checkedOrUncheckedAll(@Param("userId")Integer userId, @Param("checked")Integer checked,@Param("productId")Integer productId);
 
     //注意该sql语句处理空值的方法
-    int selectCartProductCount(Integer userId);
+    int selectCartProductCount(@Param("userId") Integer userId);
+
+    List<Cart> selectCheckedCartByUserId(Integer userId);
 }

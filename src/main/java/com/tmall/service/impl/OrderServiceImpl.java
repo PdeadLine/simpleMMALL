@@ -14,18 +14,15 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.tmall.common.Const;
 import com.tmall.common.ServerResponse;
-import com.tmall.dao.OrderItemMapper;
-import com.tmall.dao.OrderMapper;
-import com.tmall.dao.PayInfoMapper;
-import com.tmall.pojo.Order;
-import com.tmall.pojo.OrderItem;
-import com.tmall.pojo.PayInfo;
+import com.tmall.dao.*;
+import com.tmall.pojo.*;
 import com.tmall.service.IOrderService;
 import com.tmall.util.BigDecimalUtil;
 import com.tmall.util.DateTimeUtill;
 import com.tmall.util.FTPUtil;
 import com.tmall.util.PropertiesUtil;
 import net.sf.jsqlparser.schema.Server;
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,9 +31,11 @@ import org.springframework.stereotype.Service;
 
 import java.io.File;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 
 /**
@@ -50,7 +49,109 @@ public class OrderServiceImpl implements IOrderService {
     private OrderMapper orderMapper;
     @Autowired
     private OrderItemMapper orderItemMapper;
+    @Autowired
+    private CartMapper cartMapper;
+    @Autowired
+    private ProductMapper productMapper;
+
     private Logger log = LoggerFactory.getLogger(OrderServiceImpl.class);
+
+    public ServerResponse createOrder(Integer userId,Integer shippingId) {
+        //从购物车中获取数据
+        List<Cart> cartList = cartMapper.selectCheckedCartByUserId(userId);
+        // 计算这个订单的总价
+        ServerResponse<List<OrderItem>> serverResponse = this.getCartOrderItem(userId, cartList);
+        if (!serverResponse.isSuccess()) {
+            return serverResponse;
+        }
+        List<OrderItem> orderItemList=( List<OrderItem>)serverResponse.getData();
+        BigDecimal payment = this.getOrderTotalPrice(orderItemList);
+        //生成订单
+        Order order = this.assembleOrder(userId, shippingId, payment);
+
+        return null;
+    }
+
+    /**
+     * 组装Order
+     * @param userId
+     * @param shippingId
+     * @param payment
+     * @return
+     */
+    private Order assembleOrder(Integer userId, Integer shippingId,BigDecimal payment) {
+        Order order = new Order();
+        long orderNo=this.generateOrderNo();
+        order.setOrderNo(orderNo);
+        order.setStatus(Const.OrderStatusEnum.NO_PAY.getCode());
+        order.setUserId(userId);
+        order.setShippingId(shippingId);
+        order.setPayment(payment);
+        order.setPostage(0);
+        order.setPaymentType(Const.PaymentTypeEnum.ON_LINE_PAY.getCode());
+         //发货时间、付款时间等等
+        int rowCount = orderMapper.insert(order);
+        if (rowCount > 0) {
+            return order;
+        }
+        return null;
+    }
+
+    /**
+     * 生成订单号
+     * @return
+     */
+    private long generateOrderNo() {
+        long currentTime=System.currentTimeMillis();
+        return currentTime+new Random().nextInt(10);
+    }
+
+    /**
+     * 计算订单总价
+     * @param orderItemList
+     * @return
+     */
+    private BigDecimal getOrderTotalPrice(List<OrderItem> orderItemList) {
+        BigDecimal payment = new BigDecimal("0");
+        for (OrderItem orderItem : orderItemList) {
+            payment=BigDecimalUtil.add(payment.doubleValue(), orderItem.getTotalPrice().doubleValue());
+        }
+        return payment;
+    }
+    /**
+     * 获取订单明细
+     * @param userId
+     * @param cartList
+     * @return
+     */
+    private ServerResponse<List<OrderItem>> getCartOrderItem(Integer userId, List<Cart> cartList) {
+        List<OrderItem> orderItemList=Lists.newArrayList();
+        if (CollectionUtils.isEmpty(cartList)) {
+            return ServerResponse.createByErrorMessage("购物车为空");
+        }
+        //检验购物车的数据，包括产品的状态和数量
+        for (Cart cartItem : cartList) {
+            OrderItem orderItem = new OrderItem();
+            Product product = productMapper.selectByPrimaryKey(cartItem.getProductId());
+            if (Const.ProductStatusEnum.ON_SALE.getCode() != product.getStatus()) {
+                return ServerResponse.createByErrorMessage("商品：" + product.getName() + "不是在售状态");
+            }
+            //检验库存
+            if (cartItem.getQuantity() > product.getStock()) {
+                return ServerResponse.createByErrorMessage("商品：" + product.getName() + "库存不足");
+            }
+            orderItem.setUserId(userId);
+            orderItem.setProductId(product.getId());
+            orderItem.setProductName(product.getName());
+            orderItem.setProductImage(product.getMainImage());
+            orderItem.setCurrentUnitPrice(product.getPrice());
+            orderItem.setQuantity(cartItem.getQuantity());
+            orderItem.setTotalPrice(BigDecimalUtil.mul(product.getPrice().doubleValue(),cartItem.getQuantity().doubleValue()));
+            orderItemList.add(orderItem);
+        }
+        return ServerResponse.createBySuccessData(orderItemList);
+    }
+
 
     /**
      * 订单付款
