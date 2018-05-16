@@ -40,7 +40,7 @@ public class OrderController {
         if (user == null) {
             return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),ResponseCode.NEED_LOGIN.getDesc());
         }
-        return iOrderService.;
+        return iOrderService.createOrder(user.getId(), shippingId);
     }
 
 

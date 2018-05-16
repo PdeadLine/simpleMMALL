@@ -65,6 +65,15 @@ public class Const {
         }
         private String value;
         private int code;
+
+        public static OrderStatusEnum codeOf(int code) {
+            for (OrderStatusEnum orderStatusEnum : values()) {
+                if (orderStatusEnum.getCode() == code) {
+                    return orderStatusEnum;
+                }
+            }
+            throw new RuntimeException("未找到对应的枚举类！");
+        }
     }
 
     //交易状态常量
@@ -109,6 +118,14 @@ public class Const {
         private String value;
         private int code;
 
+        public static PaymentTypeEnum codeOf(int code) {
+            for (PaymentTypeEnum paymentTypeEnum : values()) {
+                if (paymentTypeEnum.getCode() == code) {
+                    return paymentTypeEnum;
+                }
+            }
+            throw new RuntimeException("未找到对应的枚举类！");
+        }
     }
 
 }

@@ -10,4 +10,6 @@ public interface IOrderService {
     public ServerResponse aliCallBack(Map<String, String> params);
 
     public ServerResponse queryOrderPayStatus(Integer userId, Long orderNo);
+
+    public ServerResponse createOrder(Integer userId, Integer shippingId);
 }
