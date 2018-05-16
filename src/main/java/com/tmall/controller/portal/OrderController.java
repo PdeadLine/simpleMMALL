@@ -42,8 +42,34 @@ public class OrderController {
         }
         return iOrderService.createOrder(user.getId(), shippingId);
     }
-
-
+    @ResponseBody
+    @RequestMapping("cancel.do")
+    public ServerResponse cancelOrder(HttpSession session,Long orderNo) {
+        User user = (User) session.getAttribute(Const.CURRENT_USER);
+        if (user == null) {
+            return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),ResponseCode.NEED_LOGIN.getDesc());
+        }
+        return iOrderService.cancelOrder(user.getId(), orderNo);
+    }
+    @ResponseBody
+    @RequestMapping("get_order_cart_product.do")
+    public ServerResponse getOrderCartProduct(HttpSession session) {
+        User user = (User) session.getAttribute(Const.CURRENT_USER);
+        if (user == null) {
+            return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),ResponseCode.NEED_LOGIN.getDesc());
+        }
+        return iOrderService.getOrderCartProduct(user.getId());
+    }
+    @ResponseBody
+    @RequestMapping("detial.do")
+    public ServerResponse detial(HttpSession session) {
+        User user = (User) session.getAttribute(Const.CURRENT_USER);
+        if (user == null) {
+            return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),ResponseCode.NEED_LOGIN.getDesc());
+        }
+        //todo 业务实现
+        return iOrderService.x;
+    }
 
 
 

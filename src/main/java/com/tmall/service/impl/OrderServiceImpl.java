@@ -22,6 +22,7 @@ import com.tmall.util.DateTimeUtill;
 import com.tmall.util.FTPUtil;
 import com.tmall.util.PropertiesUtil;
 import com.tmall.vo.OrderItemVo;
+import com.tmall.vo.OrderProductVo;
 import com.tmall.vo.OrderVo;
 import com.tmall.vo.ShippingVo;
 import net.sf.jsqlparser.schema.Server;
@@ -262,6 +263,54 @@ public class OrderServiceImpl implements IOrderService {
         }
         return ServerResponse.createBySuccessData(orderItemList);
     }
+
+    public ServerResponse cancelOrder(Integer userId, Long orderNo) {
+        Order order = orderMapper.selectByUserIdAndOrderNo(userId, orderNo);
+        if (order == null) {
+            return ServerResponse.createByErrorMessage("该用户不存在此订单");
+        }
+        if (order.getStatus() != Const.OrderStatusEnum.NO_PAY.getCode()) {
+            return ServerResponse.createByErrorMessage("订单已付款，无法取消订单");
+        }
+        Order updateOrder = new Order();
+        updateOrder.setId(order.getId());
+        updateOrder.setStatus(Const.OrderStatusEnum.CANCELED.getCode());
+        int rowCount = orderMapper.updateByPrimaryKeySelective(updateOrder);
+        if (rowCount > 0) {
+            return ServerResponse.createBySuccess();
+        }
+            return ServerResponse.createByError();
+    }
+
+    public ServerResponse getOrderCartProduct(Integer userId) {
+        OrderProductVo orderProductVo = new OrderProductVo();
+        //从购物车中获取数据
+        List<Cart> cartList = cartMapper.selectCheckedCartByUserId(userId);
+        ServerResponse serverResponse = this.getCartOrderItem(userId, cartList);
+        if (!serverResponse.isSuccess()) {
+            return serverResponse;
+        }
+        List<OrderItem> orderItemList= (List<OrderItem>) serverResponse.getData();
+        List<OrderItemVo> orderItemVoList=Lists.newArrayList();
+        BigDecimal pament = new BigDecimal("0");
+        for (OrderItem orderItem : orderItemList) {
+            pament = BigDecimalUtil.add(pament.doubleValue(), orderItem.getTotalPrice().doubleValue());
+            orderItemVoList.add(this.assembleOrderItemVo(orderItem));
+        }
+        orderProductVo.setOrderItemVoList(orderItemVoList);
+        orderProductVo.setProductTotalPrice(pament);
+        orderProductVo.setImageHost(PropertiesUtil.getProperty("ftp.server.http.prefix"));
+        return ServerResponse.createBySuccessData(orderProductVo);
+    }
+
+
+
+
+
+
+
+
+
 
 
     /**
