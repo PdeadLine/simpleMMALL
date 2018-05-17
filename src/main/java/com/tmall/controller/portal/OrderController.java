@@ -14,6 +14,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
@@ -61,16 +62,24 @@ public class OrderController {
         return iOrderService.getOrderCartProduct(user.getId());
     }
     @ResponseBody
-    @RequestMapping("detial.do")
-    public ServerResponse detial(HttpSession session) {
+    @RequestMapping("detail.do")
+    public ServerResponse getOrderDetail(HttpSession session,Long orderNo) {
         User user = (User) session.getAttribute(Const.CURRENT_USER);
         if (user == null) {
             return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),ResponseCode.NEED_LOGIN.getDesc());
         }
-        //todo 业务实现
-        return iOrderService.x;
+        return iOrderService.getOrderDetail(user.getId(),orderNo);
     }
-
+    @ResponseBody
+    @RequestMapping("list.do")
+    public ServerResponse list(HttpSession session, @RequestParam(value = "pageNum",defaultValue = "1") Integer pageNum,
+                               @RequestParam(value = "pageSize",defaultValue = "10")Integer pageSize) {
+        User user = (User) session.getAttribute(Const.CURRENT_USER);
+        if (user == null) {
+            return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),ResponseCode.NEED_LOGIN.getDesc());
+        }
+        return iOrderService.getOrderList(user.getId(),pageNum,pageSize);
+    }
 
 
 

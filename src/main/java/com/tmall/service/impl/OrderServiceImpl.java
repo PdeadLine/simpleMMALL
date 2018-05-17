@@ -10,8 +10,11 @@ import com.alipay.demo.trade.model.result.AlipayF2FPrecreateResult;
 import com.alipay.demo.trade.service.AlipayTradeService;
 import com.alipay.demo.trade.service.impl.AlipayTradeServiceImpl;
 import com.alipay.demo.trade.utils.ZxingUtils;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import com.google.common.collect.Ordering;
 import com.tmall.common.Const;
 import com.tmall.common.ServerResponse;
 import com.tmall.dao.*;
@@ -303,6 +306,56 @@ public class OrderServiceImpl implements IOrderService {
         return ServerResponse.createBySuccessData(orderProductVo);
     }
 
+    /**
+     * 获取订单详情
+     * @param userId
+     * @param orderNo
+     * @return
+     */
+    public ServerResponse<OrderVo> getOrderDetail(Integer userId, Long orderNo) {
+        Order order = orderMapper.selectByUserIdAndOrderNo(userId, orderNo);
+        if (order != null) {
+            List<OrderItem> orderItemList = orderItemMapper.getByOrderNoUserId(userId, orderNo);
+            OrderVo orderVo = this.assembleOrderVo(order, orderItemList);
+            return ServerResponse.createBySuccessData(orderVo);
+        }
+        return ServerResponse.createByErrorMessage("没有找到该订单");
+    }
+
+    public ServerResponse<PageInfo> getOrderList(Integer userId,Integer pageNum,Integer pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
+        List<Order> orderList = orderMapper.selectByUserId(userId);
+        List<OrderVo> orderVoList = this.assembleOrderVoList(orderList, userId);
+        PageInfo pageResult=new PageInfo(orderList);
+        pageResult.setList(orderVoList);
+        return ServerResponse.createBySuccessData(pageResult);
+    }
+
+    /**
+     * 装配OrderVo集合
+     * @param orderList
+     * @return
+     */
+    private List<OrderVo> assembleOrderVoList(List<Order> orderList,Integer userId) {
+        List<OrderVo> orderVoList = Lists.newArrayList();
+        for (Order order : orderList) {
+            List<OrderItem> orderItemList=Lists.newArrayList();
+            if (userId == null) {
+                orderItemList = orderItemMapper.getByOrderNo(order.getOrderNo());
+            } else {
+              orderItemList = orderItemMapper.getByOrderNoUserId(order.getUserId(), order.getOrderNo());
+            }
+            OrderVo orderVo = this.assembleOrderVo(order, orderItemList);
+            orderVoList.add(orderVo);
+        }
+        return orderVoList;
+    }
+
+
+
+
+
+
 
 
 
@@ -490,4 +543,29 @@ public class OrderServiceImpl implements IOrderService {
         }
         return ServerResponse.createByError();
     }
+
+
+    //backend
+    public ServerResponse<PageInfo> manageList(int pageNum,int pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
+        List<Order> orderList = orderMapper.selectAllOrder();
+        List<OrderVo> orderVoList = this.assembleOrderVoList(orderList,null);
+        PageInfo pageResult = new PageInfo(orderList);
+        pageResult.setList(orderVoList);
+        return ServerResponse.createBySuccessData(pageResult);
+    }
+
+    public ServerResponse<OrderVo> manageDetail(Long orderNo) {
+        Order order = orderMapper.selectByOrderNo(orderNo);
+        if (order != null) {
+            List<OrderItem> orderItemList = orderItemMapper.getByOrderNo(orderNo);
+            OrderVo orderVo = assembleOrderVo(order, orderItemList);
+            return ServerResponse.createBySuccessData(orderVo);
+        }
+        return ServerResponse.createByErrorMessage("订单不存在！");
+    }
+
+
 }
+
+

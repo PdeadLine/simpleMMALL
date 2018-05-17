@@ -183,4 +183,11 @@
       )
     </foreach>
   </insert>
+  <select id="getByOrderNo" resultMap="BaseResultMap" parameterType="long">
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM tmall_order_item
+    where order_no=#{orderNo}
+  </select>
+
 </mapper>
