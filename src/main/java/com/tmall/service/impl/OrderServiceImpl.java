@@ -39,10 +39,7 @@ import org.springframework.stereotype.Service;
 import java.io.File;
 import java.io.IOException;
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 
 
 /**
@@ -565,6 +562,38 @@ public class OrderServiceImpl implements IOrderService {
         return ServerResponse.createByErrorMessage("订单不存在！");
     }
 
+    /**
+     * 当前版本，只做了精确匹配，稍后版本更新模糊匹配和分页
+     * @param orderNo
+     * @return
+     */
+    public ServerResponse<PageInfo> manageSearch(Long orderNo,int pageNum,int pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
+        Order order = orderMapper.selectByOrderNo(orderNo);
+        if (order != null) {
+            List<OrderItem> orderItemList = orderItemMapper.getByOrderNo(orderNo);
+            OrderVo orderVo = assembleOrderVo(order, orderItemList);
+
+            PageInfo pageResult = new PageInfo(Lists.newArrayList(order));
+            pageResult.setList(Lists.newArrayList(orderVo));
+
+            return ServerResponse.createBySuccessData(pageResult);
+        }
+        return ServerResponse.createByErrorMessage("订单不存在！");
+    }
+
+    public ServerResponse<String> manageSendGoods(Long orderNO) {
+        Order order = orderMapper.selectByOrderNo(orderNO);
+        if (order != null) {
+            if (order.getStatus() == Const.OrderStatusEnum.PAID.getCode()) {
+                order.setStatus(Const.OrderStatusEnum.SHIPPED.getCode());
+                order.setUpdateTime(new Date());
+                orderMapper.updateByPrimaryKeySelective(order);
+                return ServerResponse.createBySuccessMessage("发货成功");
+            }
+        }
+        return ServerResponse.createByErrorMessage("订单不存在！");
+    }
 
 }
 

@@ -7,6 +7,7 @@ import com.tmall.common.ServerResponse;
 import com.tmall.pojo.User;
 import com.tmall.service.IOrderService;
 import com.tmall.service.IUserService;
+import com.tmall.vo.OrderVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -37,7 +38,7 @@ public class orderManageController {
         }
         if (iUserService.checkAdminRoll(user).isSuccess()) {
             //业务逻辑
-            return iOrderService.
+            return iOrderService.manageList(pageNum, pageSize);
 
         }
         return ServerResponse.createByErrorMessage("非管理员用户，无权限操作");
@@ -45,17 +46,48 @@ public class orderManageController {
 
     @ResponseBody
     @RequestMapping("detail.do")
-    public ServerResponse<PageInfo> getOrderDetail(HttpSession session,Long orderNo) {
+    public ServerResponse<OrderVo> getOrderDetail(HttpSession session, Long orderNo) {
         User user = (User) session.getAttribute(Const.CURRENT_USER);
         if (user == null) {
             return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),ResponseCode.NEED_LOGIN.getDesc());
         }
         if (iUserService.checkAdminRoll(user).isSuccess()) {
             //业务逻辑
-            return iOrderService.
+            return iOrderService.manageDetail(orderNo);
 
         }
         return ServerResponse.createByErrorMessage("非管理员用户，无权限操作");
     }
 
+    @ResponseBody
+    @RequestMapping("search.do")
+    public ServerResponse<PageInfo> orderSearch(HttpSession session, Long orderNo,
+                                               @RequestParam(value = "pageNum",defaultValue = "1") int pageNum,
+                                               @RequestParam(value = "pageSize",defaultValue = "10")int pageSize) {
+        User user = (User) session.getAttribute(Const.CURRENT_USER);
+        if (user == null) {
+            return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),ResponseCode.NEED_LOGIN.getDesc());
+        }
+        if (iUserService.checkAdminRoll(user).isSuccess()) {
+            //业务逻辑
+            return iOrderService.manageSearch(orderNo,pageNum,pageSize);
+
+        }
+        return ServerResponse.createByErrorMessage("非管理员用户，无权限操作");
+    }
+
+    @ResponseBody
+    @RequestMapping("send_goods.do")
+    public ServerResponse<String> orderSendGoods(HttpSession session, Long orderNo) {
+        User user = (User) session.getAttribute(Const.CURRENT_USER);
+        if (user == null) {
+            return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),ResponseCode.NEED_LOGIN.getDesc());
+        }
+        if (iUserService.checkAdminRoll(user).isSuccess()) {
+            //业务逻辑
+            return iOrderService.manageSendGoods(orderNo);
+
+        }
+        return ServerResponse.createByErrorMessage("非管理员用户，无权限操作");
+    }
 }
