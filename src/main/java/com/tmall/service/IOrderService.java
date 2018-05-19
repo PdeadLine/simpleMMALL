@@ -24,6 +24,7 @@ public interface IOrderService {
     public ServerResponse<PageInfo> getOrderList(Integer userId, Integer pageNum, Integer pageSize);
 
     public ServerResponse<PageInfo> manageList(int pageNum, int pageSize);
+
     public ServerResponse<OrderVo> manageDetail(Long orderNo);
 
     public ServerResponse<PageInfo> manageSearch(Long orderNo, int pageNum, int pageSize);

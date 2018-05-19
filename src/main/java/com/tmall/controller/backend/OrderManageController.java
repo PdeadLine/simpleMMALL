@@ -21,9 +21,10 @@ import javax.servlet.http.HttpSession;
  */
 @Controller
 @RequestMapping("/manage/order")
-public class orderManageController {
+public class OrderManageController {
     @Autowired
     private IOrderService iOrderService;
+
     @Autowired
     private IUserService iUserService;
 

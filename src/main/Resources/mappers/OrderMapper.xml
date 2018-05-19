@@ -176,7 +176,7 @@
         create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
       <if test="updateTime != null" >
-        now(),
+        update_time =now()
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
@@ -217,7 +217,7 @@
     select
     <include refid="Base_Column_List"/>
     from tmall_order
-    where usr_id=#{userId}/*这里加一个排序*/
+    where user_id=#{userId}/*这里加一个排序*/
     order by creat_time desc
   </select>
   <select id="selectAllOrder" resultMap="BaseResultMap">
