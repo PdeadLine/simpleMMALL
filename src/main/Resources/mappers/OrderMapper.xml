@@ -218,7 +218,7 @@
     <include refid="Base_Column_List"/>
     from tmall_order
     where user_id=#{userId}/*这里加一个排序*/
-    order by creat_time desc
+    order by create_time desc
   </select>
   <select id="selectAllOrder" resultMap="BaseResultMap">
     select

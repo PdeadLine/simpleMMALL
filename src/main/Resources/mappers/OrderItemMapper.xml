@@ -166,7 +166,7 @@
   <select id="getByOrderNoUserId" resultMap="BaseResultMap" parameterType="map">
     select
     <include refid="Base_Column_List"/>
-    from tmall_orderItem
+    from tmall_order_item
     where order_no=#{orderNo}
     and user_id=#{userId}
   </select>
@@ -178,7 +178,7 @@
     values
     <foreach collection="orderItemList" separator="," index="index" item="item">
       (
-        #{item.id},#{item.userId},#{item.orderNo},#{item.userId},#{item.productId},#{item.productName},#{item.productImage},
+        #{item.id},#{item.userId},#{item.orderNo},#{item.productId},#{item.productName},#{item.productImage},
          #{item.currentUnitPrice},#{item.quantity},#{item.totalPrice},now(),now()
       )
     </foreach>
