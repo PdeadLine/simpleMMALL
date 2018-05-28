@@ -461,9 +461,11 @@ public class OrderServiceImpl implements IOrderService {
                     //细节来了  细节
                     String qrPath = String.format(path+"/qr-%s.png", response.getOutTradeNo());
                     String qrFileName=String.format("qr-%s.png",response.getOutTradeNo());
-                    ZxingUtils.getQRCodeImge(response.getQrCode(), 256, qrPath);
+                    File targetFile=ZxingUtils.getQRCodeImge(response.getQrCode(), 256, qrPath);
 
-                    File targetFile = new File(qrPath, qrFileName);
+                    //File targetFile = new File(qrPath, qrFileName);
+
+
                     try {
                         FTPUtil.uploadFile(Lists.newArrayList(targetFile));
                     } catch (IOException e) {

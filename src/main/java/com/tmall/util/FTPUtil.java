@@ -37,7 +37,7 @@ public class FTPUtil {
         FTPUtil ftpUtil = new FTPUtil(ftpIp, 21, ftpUser, ftpPass);
         logger.info("开始链接ftp服务器");
         boolean result = ftpUtil.uploadFile("img", fileList);
-        logger.info("开始连接FTP服务器，结束上传，上传结果:{}");
+        logger.info("开始连接FTP服务器，结束上传，上传结果:{}",result);
         return result;
     }
 
@@ -81,7 +81,7 @@ public class FTPUtil {
      */
     private boolean connectServer(String ip, int port, String user, String password) {
         boolean isSuccess=false;
-        FTPClient ftpClient= new FTPClient();
+         ftpClient= new FTPClient();
         try {
             ftpClient.connect(ip);
             isSuccess=ftpClient.login(user, password);
